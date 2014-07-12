@@ -21,8 +21,18 @@
 using namespace std;
 using namespace boost;
 
-template<class T>
-struct shared_ptr_less {
+template<typename T>
+struct shared_ptr_hash : unary_function<std::shared_ptr<T>, size_t> {
+  size_t operator() (const std::shared_ptr<T> &a) const {return hash_value(*a);}
+};
+
+template<typename T>
+struct shared_ptr_equal_to : binary_function<std::shared_ptr<T>, std::shared_ptr<T>, size_t> {
+  size_t operator() (const std::shared_ptr<T> &a, const std::shared_ptr<T> &b) const {return *a == *b;}
+};
+
+template<typename T>
+struct shared_ptr_less_than : binary_function<std::shared_ptr<T>, std::shared_ptr<T>, bool> {
   bool operator() (const std::shared_ptr<T> &a, const std::shared_ptr<T> &b) const {return *a < *b;}
 };
 
@@ -35,7 +45,9 @@ class profile
   private:
 
     string name;
-    set<std::shared_ptr<common_profile>, shared_ptr_less<common_profile>> entries;
+    boost::unordered_set<std::shared_ptr<common_profile>,
+                         shared_ptr_hash<common_profile>,
+                         shared_ptr_equal_to<common_profile>> entries;
 
   public:
 

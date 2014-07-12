@@ -46,8 +46,10 @@ common_profile::operator property_tree::ptree() const {
 
 size_t hash_value(const common_profile &a)
 {
-  std::hash<std::string> str_hash;
-  return str_hash(a.type) + str_hash(a.name);
+  size_t seed = 0;
+  boost::hash_combine(seed, a.type);
+  boost::hash_combine(seed, a.name);
+  return seed;
 }
 
 bool operator==(const common_profile &a, const common_profile &b)

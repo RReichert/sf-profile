@@ -86,7 +86,10 @@ profile::operator property_tree::ptree() const
 {
   property_tree::ptree tree = property_tree::ptree();
 
-  for(const std::shared_ptr<common_profile> &entry : entries) {
+  vector<std::shared_ptr<common_profile>> sorted_entries(entries.begin(), entries.end());
+  std::sort(sorted_entries.begin(), sorted_entries.end(), shared_ptr_less_than<common_profile>{});
+
+  for(const std::shared_ptr<common_profile> &entry : sorted_entries) {
     tree.push_back(make_pair(entry->getType(), entry->operator property_tree::ptree()));
   }
 
