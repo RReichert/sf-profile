@@ -17,25 +17,27 @@ CONFIG += c++11
 
 TEMPLATE = app
 
-SOURCES += main.cpp \
-    models/app_access.cpp \
-    models/class_access.cpp \
-    models/field_permission.cpp \
-    models/object_permission.cpp \
-    models/page_access.cpp \
-    models/record_type_access.cpp \
-    models/tab_access.cpp \
-    models/common_profile.cpp \
-    profile.cpp
+INCLUDEPATH += src
+
+SOURCES += src/main.cpp \
+    src/models/app_access.cpp \
+    src/models/class_access.cpp \
+    src/models/field_permission.cpp \
+    src/models/object_permission.cpp \
+    src/models/page_access.cpp \
+    src/models/record_type_access.cpp \
+    src/models/tab_access.cpp \
+    src/models/common_profile.cpp \
+    src/profile.cpp
 
 HEADERS += \
-    exceptions/profile_exception.h \
-    models/app_access.h \
-    models/class_access.h \
-    models/field_permission.h \
-    models/object_permission.h \
-    models/page_access.h \
-    models/record_type_access.h \
-    models/tab_access.h \
-    models/common_profile.h \
-    profile.h
+    src/exceptions/profile_exception.h \
+    src/models/app_access.h \
+    src/models/class_access.h \
+    src/models/field_permission.h \
+    src/models/object_permission.h \
+    src/models/page_access.h \
+    src/models/record_type_access.h \
+    src/models/tab_access.h \
+    src/models/common_profile.h \
+    src/profile.h

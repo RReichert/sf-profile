@@ -1,2 +1,4 @@
-Profile.pro.user*
+bin/
 build/
+
+Profile.pro.user*
